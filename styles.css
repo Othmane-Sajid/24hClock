@@ -37,10 +37,10 @@ body{
     background-color: beige;
     left: 50%;
     top: 0%;
-    height: 200px;
-    width: 500px;
-    margin-top: 50px;
-    margin-left: -250px;
+    height: 20vh;
+    width: 30vw;
+    margin-top: 2vh;
+    margin-left: -15vw;
     z-index: 2;
 }
 #sect-ticker{
@@ -48,9 +48,9 @@ body{
     background-color: beige;
     left: 50%;
     bottom:0%;
-    height: 200px;
-    width: 500px;
-    margin-bottom: 50px;
-    margin-left: -250px;
+    height: 20vh;
+    width: 30vw;
+    margin-bottom: 2vh;
+    margin-left: -15vw;
     z-index: 2;
 }
