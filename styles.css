@@ -22,3 +22,12 @@ body{
     background-repeat: no-repeat; 
     background-size: cover; 
 }
+
+#sect-clock{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -500px;
+    margin-left: -500px;
+    z-index: 2;
+}
