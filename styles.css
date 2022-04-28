@@ -31,3 +31,26 @@ body{
     margin-left: -500px;
     z-index: 2;
 }
+
+#sect-hour{
+    position: absolute;
+    background-color: beige;
+    left: 50%;
+    top: 0%;
+    height: 200px;
+    width: 500px;
+    margin-top: 50px;
+    margin-left: -250px;
+    z-index: 2;
+}
+#sect-ticker{
+    position: absolute;
+    background-color: beige;
+    left: 50%;
+    bottom:0%;
+    height: 200px;
+    width: 500px;
+    margin-bottom: 50px;
+    margin-left: -250px;
+    z-index: 2;
+}
