@@ -1,0 +1,24 @@
+body{
+    background-color: black;
+}
+
+#container{
+    display:flex;
+}
+#sect-avant-midi{
+    background-image: url("./Assets/beforenoon.jpg");
+    width: 50vw;
+    height: 100vh;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover;
+}
+
+#sect-apres-midi{
+    background-image: url("./Assets/afternoon.jpg");
+    width: 50vw;
+    height: 100vh;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+}
