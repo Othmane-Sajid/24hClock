@@ -83,3 +83,35 @@ body{
     margin-left: -15vw;
     z-index: 2;
 }
+
+#sect-hour h1 { 
+    margin:auto;
+    text-align: center; 
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position:relative;
+    top: 25%;   
+}
+
+
+/* Ticker défilement */
+/* Inspired by https://code-boxx.com/html-css-news-ticker-horizontal-vertical/#sec-horizontal */
+.wrapper {
+    overflow: hidden; 
+    background: #eee;
+  }
+   
+  .tickerMessage {
+    font-size:xx-large;
+    padding: 60px;
+    text-align: center;
+  }
+  @keyframes keyTimes {
+    0% { transform: translate3d(100%, 0, 0); }
+    20% { transform: translate3d(20%, 0, 0); }
+    70% { transform: translate3d(-20%, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+  }
+  .defilementAnim { animation: keyTimes ease-in-out 3.5s infinite; 
+}
+
+
