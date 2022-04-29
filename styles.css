@@ -24,21 +24,23 @@ body{
 }
 
 #sect-lune{
-    background-color: blue;
     width: 15vh;
     height: 15vh;
-    border-style: dotted;
     margin-top: 10vh;
     margin-left: 15vw;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover; 
 }
 
-#sect-soleil{
-    background-color: red;
+#sect-jour{
     width: 15vh;
     height: 15vh;
-    border-style: dotted;
     margin-top: 10vh;
     margin-left: 27vw;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover; 
 }
 
 #sect-legend{
