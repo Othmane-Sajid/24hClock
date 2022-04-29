@@ -22,3 +22,64 @@ body{
     background-repeat: no-repeat; 
     background-size: cover; 
 }
+
+#sect-lune{
+    width: 15vh;
+    height: 15vh;
+    margin-top: 10vh;
+    margin-left: 15vw;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+}
+
+#sect-jour{
+    width: 15vh;
+    height: 15vh;
+    margin-top: 10vh;
+    margin-left: 27vw;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+}
+
+#sect-legend{
+    background-color: white;
+    width: 15vh;
+    height: 15vh;
+    border-style: dotted;
+    margin-top: 52vh;
+    margin-left: 27vw;
+}
+
+#sect-clock{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -500px;
+    margin-left: -500px;
+    z-index: 2;
+}
+
+#sect-hour{
+    position: absolute;
+    background-color: beige;
+    left: 50%;
+    top: 0%;
+    height: 20vh;
+    width: 30vw;
+    margin-top: 2vh;
+    margin-left: -15vw;
+    z-index: 2;
+}
+#sect-ticker{
+    position: absolute;
+    background-color: beige;
+    left: 50%;
+    bottom:0%;
+    height: 20vh;
+    width: 30vw;
+    margin-bottom: 2vh;
+    margin-left: -15vw;
+    z-index: 2;
+}
