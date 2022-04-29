@@ -23,6 +23,33 @@ body{
     background-size: cover; 
 }
 
+#sect-lune{
+    background-color: blue;
+    width: 15vh;
+    height: 15vh;
+    border-style: dotted;
+    margin-top: 10vh;
+    margin-left: 15vw;
+}
+
+#sect-soleil{
+    background-color: red;
+    width: 15vh;
+    height: 15vh;
+    border-style: dotted;
+    margin-top: 10vh;
+    margin-left: 27vw;
+}
+
+#sect-legend{
+    background-color: white;
+    width: 15vh;
+    height: 15vh;
+    border-style: dotted;
+    margin-top: 52vh;
+    margin-left: 27vw;
+}
+
 #sect-clock{
     position: absolute;
     left: 50%;
