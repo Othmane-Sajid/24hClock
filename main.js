@@ -1,8 +1,85 @@
-var lune = document.getElementById("sect-lune")
-lune.style.backgroundImage="url('./Assets/fullmoon.jpg')"
+function sunPosition(){
+    var today = new Date();
+    var currentHour = today.getHours()
+    var sectJour = "sect-jour"
+    
+    if((currentHour>= 22 && currentHour < 24) || (currentHour>= 0 && currentHour < 7)){
+        changeDaytState(sectJour,"./Assets/night.jpg")
+    }else if(currentHour>= 6 && currentHour < 12){
+        changeDaytState(sectJour,"./Assets/sunrise.jpg")
 
-var jour = document.getElementById("sect-jour")
-jour.style.backgroundImage="url('./Assets/night.jpg')"
+    }else if(currentHour>= 12 && currentHour < 19){
+        changeDaytState(sectJour,"./Assets/noon.jpg")
+
+    }else if(currentHour>= 19 && currentHour < 22){
+        changeDaytState(sectJour,"./Assets/sunset.jpg")
+    }
+}
+
+function moonPhase(){
+
+    var today = new Date();
+    var sectLune = "sect-lune"
+
+    var year = today.getFullYear()
+    var month = today.getMonth()+1
+    var day = today.getDay()+1
+
+    if(month == 0 || month == 1 ){
+        year-=1
+        month+=12
+    }
+
+    a1 = year/100
+    a2 = a1/4
+    a3 = 2-a1+a2
+    a4 = 365.25 * (year+4716)
+    a5 = 30.6001 * (month+1)
+    jd = a3+day+a4+a5-1524.5
+    
+    daySinceNewMoon = jd -2451549.5
+
+    newMoon = daySinceNewMoon / 29.53
+
+    cycle = Math.round( parseFloat( Number.parseFloat( newMoon % 1 ).toFixed(3) ) * 29.53)
+
+    if(cycle == 0){
+        changeDaytState(sectLune,"./Assets/newmoon.jpg")
+    }else if(cycle > 0 && cycle < 7){
+        changeDaytState(sectLune,"./Assets/waxmoon.jpg")
+
+    }else if(cycle == 7){
+        changeDaytState(sectLune,"./Assets/firstmoon.jpg")
+
+    }else if(cycle > 7 && cycle < 15){
+        changeDaytState(sectLune,"./Assets/waxgibmoon.jpg")
+    }else if(cycle == 15){
+        changeDaytState(sectLune,"./Assets/fullmoon.jpg")
+
+    }else if(cycle > 15 && cycle < 22){
+        changeDaytState(sectLune,"./Assets/wangibmoon.jpg")
+
+    }else if(cycle == 22){
+        changeDaytState(sectLune,"./Assets/lastmoon.jpg")
+
+    }else if(cycle > 22 && cycle < 29.5){
+        changeDaytState(sectLune,"./Assets/wanmoon.jpg")
+
+    }else{
+        changeDaytState(sectLune,"./Assets/newmoon.jpg")
+    }
+
+}
+
+function changeDaytState(id,url){
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        var jour = document.getElementById(id)
+        jour.style.backgroundImage="url('"+url+"')"
+    }
+    xhttp.open("GET", "");
+    xhttp.send();
+}
 
 
 
@@ -249,7 +326,6 @@ function lireCalendrier()  {
 }
 
 
-
 function adjustHourAndMinutesHands(){
     var date = new Date();
     var minutesAngle = 360 * date.getMinutes() / 60;
@@ -282,7 +358,16 @@ function init() {
     window.onload=function() {
         setInterval(function() { showDateAndTimeNumericFormat(); },1000); 
     } 
+  
+  
+      // showDateAndTimeNumericFormat()
+    window.onload=function() {
+        setInterval(function() { showDateAndTimeNumericFormat(); },1000); 
+        setInterval(sunPosition, 1000);
+        moonPhase()
+        setInterval(moonPhase, 86400000);
 
+    } 
 
     // Adjust the Hour handle and Minutes handle
     adjustHourAndMinutesHands()
@@ -296,6 +381,9 @@ function init() {
     } 
 
 }
+
+    }
+
 
 init();
 
