@@ -9,6 +9,76 @@ jour.style.backgroundImage="url('./Assets/night.jpg')"
 
 
 
+// Place the 24h numbers 
+
+var svg=document.getElementById("monhorloge");
+var ai=document.getElementById("aig1");
+var gHeures=document.getElementById("heures");
+// var gTics=document.getElementById("tics");
+var gMeteo=document.getElementById("meteo");
+var h=0;
+
+
+function  txt(texte,rot)  {
+    var e = document.createElementNS("http://www.w3.org/2000/svg", 'text');
+    // e.setAttribute("x",630);
+    // e.setAttribute("y",500);
+    e.setAttribute("x",500);
+    e.setAttribute("y",375);
+    e.setAttribute("fill","red");
+    e.setAttribute("style","text-anchor:middle; font-family:Ubuntu; font-weight: bold; font-size:192;");
+    e.setAttribute("transform","rotate("+rot+" 500 500)");
+    var textNode = document.createTextNode(texte);
+    e.appendChild(textNode);
+    gHeures.appendChild(e);
+}
+
+function meteoDot(rot,id) {
+    var e = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+    e.setAttribute("id",id);
+    // e.setAttribute("cx","675");
+    // e.setAttribute("cy","500");
+    e.setAttribute("cx","500");
+    e.setAttribute("cy","670");
+    e.setAttribute("r","12");
+    e.setAttribute("transform","rotate(+"+rot+" 500 500)");
+    e.setAttribute("fill","red");
+    e.setAttribute("stroke","none");
+    gMeteo.appendChild(e);
+    return(e);
+}
+
+function ajuste()  {
+    ai.setAttribute("transform","rotate("+h+" 200 200)");
+    h=h+10.0;
+}
+
+
+
+for(var i=0;i<24;i++) txt(""+i,i*360/24);
+
+var meteoTab = [];
+
+for(var i=0;i<24;i++) meteoTab[i]=meteoDot(i*360/24,"meteoDot"+i);
+
+//  change un meteodot
+//var  md=document.getElementById("meteoDot4");
+//md.setAttribute("fill","green");
+
+//meteoTab[4].setAttribute("fill","rgb(255,255,0)");
+
+for(var i=0;i<24;i++) meteoTab[i].setAttribute("fill","rgb("+(i*255/23)+","+(255-i*255/23)+",255)");
+var meteoTab = [];
+
+for(var i=0;i<24;i++) meteoTab[i]=meteoDot(i*360/24,"meteoDot"+i);
+
+//  change un meteodot
+//var  md=document.getElementById("meteoDot4");
+//md.setAttribute("fill","green");
+
+//meteoTab[4].setAttribute("fill","rgb(255,255,0)");
+
+for(var i=0;i<24;i++) meteoTab[i].setAttribute("fill","rgb("+(i*255/23)+","+(255-i*255/23)+",255)");
 
 
 
@@ -18,6 +88,56 @@ jour.style.backgroundImage="url('./Assets/night.jpg')"
 
 
 
+
+// METEO 
+function traiteLaMeteo(jm) {
+    var h=jm.hourly;
+    var tmin=9999;
+    var tmax=-9999;
+    for(var i=0;i<24;i++) {
+        if( h[i].temp>tmax ) tmax=h[i].temp;
+        if( h[i].temp<tmin ) tmin=h[i].temp;
+    }
+    for(var i=0;i<24;i++) {
+        var f=(h[i].temp-tmin)/(tmax-tmin); // 0  a  1
+        //console.log(i+" : "+(h[i].temp)+  " :  "+f);
+        meteoTab[i].setAttribute("fill","rgb("+(f*255)+",0,"+(255-f*255)+")");
+    }
+    // affiche temperatures min et max
+    document.getElementById("mintemp").innerHTML=""+tmin;
+    document.getElementById("maxtemp").innerHTML=""+tmax;
+
+
+    var sunrise=jm.daily[0].sunrise;
+    var sunset=jm.daily[0].sunset;
+
+    console.log("sunrise dans "+((sunrise-Date.now()/1000)/3600));
+    console.log("sunset dans  "+((sunset-Date.now()/1000)/3600));
+
+    console.log(sunrise);
+}
+
+
+function meteo() {
+    var  url="https://api.openweathermap.org/data/2.5/onecall?lat=45.5028&lon=-73.608&units=metric&lang=fr&appid=d58eb3ba8348bea274a21ef563bb6acb"
+
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var jmeteo=JSON.parse(this.responseText);
+            traiteLaMeteo(jmeteo);
+        }
+    };
+    req.open("GET", url, true);
+    req.send();
+
+}
+
+
+
+
+
+meteo()
 
 
 

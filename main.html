@@ -24,11 +24,19 @@
 </div>
 
 <div id="sect-clock">
-    <svg height="1000" width="1000">
+    <svg height="1000" width="1000" id="monhorloge" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
         <circle cx="500" cy="500" r="200" stroke="black" stroke-width="5" fill="#FCF5E5" />
         <circle cx="500" cy="500" r="150" stroke="black" stroke-width="5" fill="#FCF5E5" />
         <line x1="500" y1="500" x2="500" y2="400" stroke="red" stroke-width="5" stroke-linecap="round"/>
         <line x1="500" y1="500" x2="500" y2="380" stroke="blue" stroke-width="3" stroke-linecap="round"/>
+
+        <path id="aig1" d="M 480 500 L 520 500  L 500 650 z" fill="red" stroke="none"       transform="rotate(0 200 200)" ></path>
+        <!-- <path id="aig1" d="M 180 200 L 220 200  L 200 380 z" fill="red" stroke="none"       transform="rotate(0 200 200)" ></path> -->
+        <g id="heures">
+        </g>
+        
+        <g id="meteo">
+        </g>
     </svg> 
 </div>
 <div id="sect-hour">
