@@ -45,11 +45,19 @@ body{
 
 #sect-legend{
     background-color: white;
-    width: 15vh;
-    height: 15vh;
+    width: 50vh;
+    height: 40vh;
     border-style: dotted;
-    margin-top: 52vh;
-    margin-left: 27vw;
+    margin-top: 30vh;
+    margin-left: 20vw;
+}
+
+#tempMin {
+    color:blue;
+}
+
+#tempMax {
+    color:red;
 }
 
 #sect-clock{

@@ -74,10 +74,9 @@ function ajuste()  {
 
 
 
+// Populate te clock with the 24 numeric values (hours) and meteo dots 
 for(var i=0;i<24;i++) txt(""+i,i*360/24);
-
 var meteoTab = [];
-
 for(var i=0;i<24;i++) meteoTab[i]=meteoDot(i*360/24,"meteoDot"+i);
 
 //  change un meteodot
@@ -114,27 +113,55 @@ function traiteLaMeteo(JsonMeteo) {
     var tmin=9999;
     var tmax=-9999;
     for(var i=0;i<24;i++) {
-        if( h[i].temp>tmax ) tmax=h[i].temp;
-        if( h[i].temp<tmin ) tmin=h[i].temp;
+        if( h[i].feels_like>tmax ) tmax=h[i].feels_like;
+        if( h[i].feels_like<tmin ) tmin=h[i].feels_like;
     }
-    for(var i=0;i<24;i++) {
-        var f=(h[i].temp-tmin)/(tmax-tmin); // 0  a  1
-        console.log(i+" : "+(h[i].temp)+  " :  "+f);
-        meteoTab[i].setAttribute("fill","rgb("+(f*255)+",0,"+(255-f*255)+")");
-    }
+
+
     // affiche temperatures min et max
 
-    // document.getElementById("mintemp").innerHTML=""+tmin;  $$$$$$$$$$$$$$$$$$$$$$$$$$$
-    // document.getElementById("maxtemp").innerHTML=""+tmax;
+
+    function rotateTimeInBounds(hour) { // Utility function to stay in the 0-23 bounds for hours
+        if (hour <24) return hour;
+        else {
+            var realHour = hour-24;
+            return realHour;
+        }
+    }
+
+    var currentHour = new Date().getHours();
+    for (var i=0; i<24; i++) {
+        var f=(h[i].feels_like-tmin)/(tmax-tmin); // 0  a  1
+        meteoTab[rotateTimeInBounds(currentHour+ i)].setAttribute("fill","rgb("+(f*255)+",0,"+(255-f*255)+")");
+    }
 
 
-    var sunrise=JsonMeteo.daily[0].sunrise;
-    var sunset=JsonMeteo.daily[0].sunset;
+    // Show infos in the Legend Section 
 
-    console.log("sunrise dans "+((sunrise-Date.now()/1000)/3600));
-    console.log("sunset dans  "+((sunset-Date.now()/1000)/3600));
+    document.getElementById("tempMin").innerHTML=''+tmin + ' degrés celcius (bleu)';
+    document.getElementById("tempMax").innerHTML=''+tmax + ' degrés celcius (rouge)';
 
-    console.log(sunrise);
+    var sunriseUnixTimeStamp=JsonMeteo.daily[0].sunrise;
+    var sunsetUnixTimeStamp=JsonMeteo.daily[0].sunset;
+    
+    var dateSunRise = new Date(sunriseUnixTimeStamp * 1000);
+    var hoursSunRise = dateSunRise.getHours();
+    if (dateSunRise.getMinutes()>=10)  var minutesSunRise = dateSunRise.getMinutes();
+    else minutesSunRise = "0" + dateSunRise.getMinutes();
+
+    var dateSunSet = new Date(sunsetUnixTimeStamp * 1000);
+    var hoursSunSet = dateSunSet.getHours();
+    if (dateSunSet.getMinutes()>=10)  var minutesSunSet = dateSunSet.getMinutes();
+    else minutesSunSet = "0" + dateSunSet.getMinutes();
+
+
+    document.getElementById("leverSoleil").innerHTML=''+hoursSunRise+'h'+minutesSunRise;
+    document.getElementById("coucherSoleil").innerHTML=''+hoursSunSet+'h'+minutesSunSet;
+
+    // console.log("sunrise dans "+((sunrise-Date.now()/1000)/3600));
+    // console.log("sunset dans  "+((sunset-Date.now()/1000)/3600));
+
+    // console.log(sunrise);
 }
 
 
@@ -152,21 +179,6 @@ function meteo() {
     req.send();
 
 }
-
-
-
-
-
-meteo()
-
-
-
-
-
-
-
-
-
 
 
 
@@ -202,12 +214,10 @@ function showDateAndTimeNumericFormat() {
 }
 
 
-
-
 // Ticker 
 function showTicker(calendrier) {  // findTickerToDisplay 
     var now=Math.round(Date.now()/1000); // a la seconde pres
-    var ds=new Date(now*1000).toLocaleString();
+    // var ds=new Date(now*1000).toLocaleString();
     
     if( typeof(calendrier)=="undefined")  return;
 
@@ -239,22 +249,8 @@ function lireCalendrier()  {
 }
 
 
-function init() {
-    lireCalendrier()
-    window.onload=(showTicker(cal));
-    window.onload=function() {
-        setInterval(function() { showTicker(cal); },15000); // verify if ticker needs to be changed every 15 sec
-    } 
-    
-    // showDateAndTimeNumericFormat()
-    window.onload=function() {
-        setInterval(function() { showDateAndTimeNumericFormat(); },1000); 
-    } 
 
-
-    // Adjust the Hour handle and Minutes handle
-
-
+function adjustHourAndMinutesHands(){
     var date = new Date();
     var minutesAngle = 360 * date.getMinutes() / 60;
     var hoursAngle = 180 + 360 * date.getHours() / 24 + date.getMinutes() / 4;
@@ -272,21 +268,34 @@ function init() {
     var newToAttribute = [minutesAngle+360, 500, 500].join(" ");
     minutesHand.setAttribute('from',newFromAttribute);
     minutesHand.setAttribute('to', newToAttribute); 
-
-
-    // var hoursHand = document.getElementById("hoursHand");
-    var aig1 = document.querySelector('#aig1 > *');
-    var newFromAttribute = [hoursAngle, 500, 500].join(" "); //500, 500 for the center of the circle/clock
-    console.log(newFromAttribute);
-    var newToAttribute = [hoursAngle+360, 500, 500].join(" ");
-    console.log(newToAttribute);
-    aig1.setAttribute('from',newFromAttribute); 
-    aig1.setAttribute('to', newToAttribute); 
-
-
-
 }
 
+
+function init() {
+    lireCalendrier()
+    window.onload=(showTicker(cal));
+    window.onload=function() {
+        setInterval(function() { showTicker(cal); },15000); // verify if ticker needs to be changed every 15 sec
+    } 
+    
+    showDateAndTimeNumericFormat()
+    window.onload=function() {
+        setInterval(function() { showDateAndTimeNumericFormat(); },1000); 
+    } 
+
+
+    // Adjust the Hour handle and Minutes handle
+    adjustHourAndMinutesHands()
+    window.onload=function() {
+        setInterval(function() { adjustHourAndMinutesHands(); },10000); // Adjust hour and minutes hands every 10 seconds 
+    } 
+
+    meteo();
+    window.onload=function() {
+        setInterval(function() { adjustHourAndMinutesHands(); },1000 * 60 * 60 ); // Update meteo every hour 
+    } 
+
+}
 
 init();
 
