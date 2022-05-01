@@ -40,8 +40,10 @@ function  txt(texte,rot)  {
     var e = document.createElementNS("http://www.w3.org/2000/svg", 'text');
     // e.setAttribute("x",630);
     // e.setAttribute("y",500);
+    // e.setAttribute("x",500);
+    // e.setAttribute("y",375);
     e.setAttribute("x",500);
-    e.setAttribute("y",375);
+    e.setAttribute("y",640);
     e.setAttribute("fill","red");
     e.setAttribute("style","text-anchor:middle; font-family:Ubuntu; font-weight: bold; font-size:192;");
     e.setAttribute("transform","rotate("+rot+" 500 500)");
@@ -254,23 +256,33 @@ function init() {
 
 
     var date = new Date();
-    var hoursAngle = 630 * date.getHours() / 12 + date.getMinutes() / 2;
+    var minutesAngle = 360 * date.getMinutes() / 60;
+    var hoursAngle = 180 + 360 * date.getHours() / 24 + date.getMinutes() / 4;
+    // var hoursAngle = 360 * date.getHours() / 24 + minutesAngle/60;
     // var hoursHand = document.getElementById("hoursHand");
     var hoursHand = document.querySelector('#hoursHand > *');
     var newFromAttribute = [hoursAngle, 500, 500].join(" "); //500, 500 for the center of the circle/clock
-    console.log(newFromAttribute);
     var newToAttribute = [hoursAngle+360, 500, 500].join(" ");
-    console.log(newToAttribute);
     hoursHand.setAttribute('from',newFromAttribute); 
     hoursHand.setAttribute('to', newToAttribute); 
 
-    var minutesAngle = 360 * date.getMinutes() / 60;
     // var minutesHand = document.getElementById("minutesHand");
     var minutesHand = document.querySelector('#minutesHand > *');
     var newFromAttribute = [minutesAngle, 500, 500].join(" ");
     var newToAttribute = [minutesAngle+360, 500, 500].join(" ");
     minutesHand.setAttribute('from',newFromAttribute);
     minutesHand.setAttribute('to', newToAttribute); 
+
+
+    // var hoursHand = document.getElementById("hoursHand");
+    var aig1 = document.querySelector('#aig1 > *');
+    var newFromAttribute = [hoursAngle, 500, 500].join(" "); //500, 500 for the center of the circle/clock
+    console.log(newFromAttribute);
+    var newToAttribute = [hoursAngle+360, 500, 500].join(" ");
+    console.log(newToAttribute);
+    aig1.setAttribute('from',newFromAttribute); 
+    aig1.setAttribute('to', newToAttribute); 
+
 
 
 }
