@@ -328,7 +328,7 @@ function init() {
         setInterval(function() { showDateAndTimeNumericFormat(); },1000); 
         setInterval(sunPosition, 1000);
         moonPhase()
-        setInterval(moonPhase, 86400);
+        setInterval(moonPhase, 86400000);
 
     } 
 
@@ -365,8 +365,6 @@ function init() {
     aig1.setAttribute('to', newToAttribute); 
 
     }
-
-}
 
 
 init();
