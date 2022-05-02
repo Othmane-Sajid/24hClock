@@ -91,6 +91,15 @@ body{
     z-index: 2;
 }
 
+#sect-nuit{
+    position: absolute;
+    left: 60%;
+    top: 90%;
+    margin-top: -500px;
+    margin-left: -500px;
+    z-index: 2;
+}
+
 #sect-hour{
     position: absolute;
     background-color: beige;
