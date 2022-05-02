@@ -297,16 +297,18 @@ function adjustHourAndMinutesHands(){ // inspired by https://codepen.io/mohebifa
     var hoursAngle = 180 + 360 * date.getHours() / 24 + date.getMinutes() / 4;
 
     var hoursHand = document.querySelector('#hoursHand > *');
-    var newFromAttribute = [hoursAngle, 500, 500].join(" "); //500, 500 for the center of the circle/clock
-    var newToAttribute = [hoursAngle+360, 500, 500].join(" ");
-    hoursHand.setAttribute('from',newFromAttribute); 
-    hoursHand.setAttribute('to', newToAttribute); 
+    var newFromAttributeHours = [hoursAngle, 500, 500].join(" "); //500, 500 for the center of the circle/clock
+    // var newToAttributeHours = [hoursAngle+360, 500, 500].join(" ");
+    var newToAttributeHours = [hoursAngle, 500, 500].join(" ");
+    hoursHand.setAttribute('from',newFromAttributeHours); 
+    hoursHand.setAttribute('to', newToAttributeHours); 
 
     var minutesHand = document.querySelector('#minutesHand > *');
-    var newFromAttribute = [minutesAngle, 500, 500].join(" ");
-    var newToAttribute = [minutesAngle+360, 500, 500].join(" ");
-    minutesHand.setAttribute('from',newFromAttribute);
-    minutesHand.setAttribute('to', newToAttribute); 
+    var newFromAttributeMinutes = [minutesAngle, 500, 500].join(" ");
+    // var newToAttributeMinutes = [minutesAngle+360, 500, 500].join(" ");
+    var newToAttributeMinutes = [minutesAngle, 500, 500].join(" ");
+    minutesHand.setAttribute('from',newFromAttributeMinutes);
+    minutesHand.setAttribute('to', newToAttributeMinutes); 
 }
 
 
@@ -325,7 +327,7 @@ function init() {
         setInterval(moonPhase(), 1000*60*60*24); //update moon phase once per day (every 24 hours)
 
         adjustHourAndMinutesHands()
-        setInterval(function() { adjustHourAndMinutesHands(); },15000); // Adjust hour and minutes hands every 15 seconds 
+        setInterval(function() { adjustHourAndMinutesHands(); },1000); // Adjust hour and minutes hands every five seconds  
 
         meteo();
         setInterval(function() { meteo(); },1000 * 60 * 60 ); // Update meteo every hour  
