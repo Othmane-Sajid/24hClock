@@ -258,14 +258,14 @@ function showDateAndTimeNumericFormat() {
 
 
 // Ticker procedure  
-function showTicker(calendrier) {  // findTickerToDisplay 
+function showTicker(calendrier) {  
     var now=Math.round(Date.now()/1000); // a la seconde pres
-    // var ds=new Date(now*1000).toLocaleString();
-    
+
     if( typeof(calendrier)=="undefined")  return;
 
     var e=document.getElementById("tickerMessage");
     var tickerToDisplay="";
+    
     for(var i=0;i<calendrier.length;i++) {
         var c = calendrier[i]; 
         var boolActif=(c.debut<now && now<c.fin);
@@ -295,7 +295,7 @@ function adjustHourAndMinutesHands(){ // inspired by https://codepen.io/mohebifa
     var date = new Date();
     var minutesAngle = 360 * date.getMinutes() / 60;
     var hoursAngle = 180 + 360 * date.getHours() / 24 + date.getMinutes() / 4;
-    
+
     var hoursHand = document.querySelector('#hoursHand > *');
     var newFromAttribute = [hoursAngle, 500, 500].join(" "); //500, 500 for the center of the circle/clock
     var newToAttribute = [hoursAngle+360, 500, 500].join(" ");
@@ -317,14 +317,15 @@ function init() {
         setInterval(function() { showTicker(cal); },15000); // verify if ticker needs to be changed every 15 sec
 
         showDateAndTimeNumericFormat()
-        setInterval(function() { showDateAndTimeNumericFormat(); },1000); 
+        setInterval(function() { showDateAndTimeNumericFormat(); },1000); // update numeric clock every second
 
-        setInterval(sunPosition(), 1000);
+        sunPosition();
+        setInterval(sunPosition(), 1000*60*15); //update sun position every 15 minutes
         moonPhase();
-        setInterval(moonPhase(), 86400000);
+        setInterval(moonPhase(), 1000*60*60*24); //update moon phase once per day (every 24 hours)
 
         adjustHourAndMinutesHands()
-        setInterval(function() { adjustHourAndMinutesHands(); },10000); // Adjust hour and minutes hands every 10 seconds 
+        setInterval(function() { adjustHourAndMinutesHands(); },15000); // Adjust hour and minutes hands every 15 seconds 
 
         meteo();
         setInterval(function() { meteo(); },1000 * 60 * 60 ); // Update meteo every hour  
