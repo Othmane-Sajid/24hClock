@@ -30,9 +30,11 @@ body{
     top: 00%;
 }
 #star3{
+    width: 50%;
+    height: 55%;
     position: absolute;
-    left: 60%;
-    top: 20%;
+    left: 50%;
+    top: 0%;
 }
 
 #sect-apres-midi{
