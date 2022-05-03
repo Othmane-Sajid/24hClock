@@ -9,7 +9,7 @@ function changeDaytState(id,url){ // utlity function for sun and moon phase
     xhttp.send();
 }
 
-
+//Determine la position du soleil
 function sunPosition(){
     var today = new Date();
     var currentHour = today.getHours();
@@ -28,6 +28,7 @@ function sunPosition(){
     }
 }
 
+//Determine la position de la lune
 function moonPhase(){
     var today = new Date();
     var sectLune = "sect-lune"
@@ -40,6 +41,8 @@ function moonPhase(){
         year-=1;
         month+=12;
     }
+
+    //Cacul pour detreminer la phase lunaires
 
     a1 = year/100;
     a2 = a1/4;
@@ -99,14 +102,15 @@ function setSun(JsonMeteo){
     if (dateSunSet.getMinutes()>=10)  var minutesSunSet = dateSunSet.getMinutes();
     else minutesSunSet = "0" + dateSunSet.getMinutes();
 
-    //console.log(hoursSunRise+'h'+minutesSunRise)
-    //console.log(hoursSunSet+'h'+minutesSunSet)
-
-
     var hoursAngleSunRise = 180 + 360 * hoursSunRise / 24 + minutesSunRise / 4;
     var hoursAngleSunSet = 180 + 360 * hoursSunSet/ 24 + minutesSunSet / 4;
 
+
+    // rotation de 180 degrés en radiant
     var ajustement = Math.PI/180 * 180
+
+
+    // Cacul des coordonnées en x et y à partir de l'angle converti en radiant
 
     var sintmpAngleRise = Math.sin(hoursAngleSunRise* Math.PI/180 + ajustement)
     var costmpAngleRise = Math.cos(hoursAngleSunRise * Math.PI/180 + ajustement)
@@ -120,10 +124,6 @@ function setSun(JsonMeteo){
 
     var xSunSet = 500 - rayon*sintmpAngleSet
     var ySunSet = rayon*costmpAngleSet + 500
-
-    console.log(hoursAngleSunRise)
-    console.log(xSunRise)
-    console.log(ySunRise)
 
     var lever = document.getElementById("lineleverSoleil")
     var coucher = document.getElementById("linecoucherSoleil")
