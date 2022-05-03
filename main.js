@@ -205,7 +205,8 @@ for(var i=0;i<24;i++) meteoTab[i]=meteoDot(i*360/24,"meteoDot"+i);
 
 
 
-// Function to use Hourly feels_like temperature and represent it visualy on the clock with a color gradient. Also display some textual infos (sunrise, sunset, min and max feels_like temps) 
+// Function to use Hourly feels_like temperature and represent it visualy on the clock with a color gradient. 
+// Also display some textual infos (sunrise, sunset, min and max feels_like temps) 
 function traiteLaMeteo(JsonMeteo) {
     var h=JsonMeteo.hourly;
     var tmin=9999;

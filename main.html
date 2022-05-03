@@ -10,18 +10,42 @@
 
     <div id="sect-avant-midi">
         <div id="sect-lune">
-            <img src="/Assets/bird.gif" alt="bird" style="margin-left: 60%; margin-top: 80%;">
-            <img src="/Assets/bird.gif" alt="bird" style="margin-left: 150%; margin-top: 30%;">
-            <img src="/Assets/bird.gif" alt="bird" style="margin-left: 60%; margin-top: 80%;">
-            <img src="/Assets/bird.gif" alt="bird" style="margin-left: 80%; margin-top: 0%;">
-            <img src="/Assets/bird.gif" alt="bird" style="margin-left: 90%; margin-top: 0%;">
+            <img src="Assets/bird.gif" alt="bird" style="margin-left: 60%; margin-top: 80%;">
+            
+            <img src="Assets/bird.gif" alt="bird" style="margin-left: 150%; margin-top: 30%;">
+            <img src="Assets/bird.gif" alt="bird" style="margin-left: 10%; margin-top: 1%;">
+
+            <img src="Assets/bird.gif" alt="bird" style="margin-left: 160%; margin-top: 80%;">
+            <img src="Assets/bird.gif" alt="bird" style="margin-left: 80%; margin-bottom: 50%;">
+            <img src="Assets/bird.gif" alt="bird" style="margin-left: 150%; margin-top: -400%;">
         </div>
+
+        <div id="sect-presentation">
+
+            <h2 style="color:crimson"> L'horloge 24h indispensable pour bien commencer votre journée !  <br>
+
+            </h2>
+            <h4> Cette horloge est tout ce dont vous avez besoin pour commencer votre journée. Vous pouvez y trouver : <br>
+                - L'heure de façon numérique et analogique <br>
+                - La date et le jour de la semaine <br>
+                - La phase actuelle de la lune (coin supérieur gauche)  <br>
+                - L'état du soleil (coin supérieur droit) <br>
+                - L'heure exacte de lever et de coucher du soleil (lignes pointillées dans l'horloge) <br>
+                - La température ressentie pour les 24 prochaines heures <br> 
+                (indiqué visuellement par les petits cercles à côté de chaque heure, et qui vont du bleu au rouge)
+
+            </h4>
+
+
+
+        </div>
+
     </div>
     <div id="sect-apres-midi">
         <div id="sect-jour">
-            <img id="star1"src="/Assets/shootingstar.gif" alt="shooting star" >
-            <img id="star2"src="/Assets/shootingstar2.gif" alt="shooting star" >
-            <img id="star3"src="/Assets/star.gif" alt="shooting star" >
+            <img id="star1"src="Assets/shootingstar.gif" alt="shooting star" >
+            <img id="star2"src="Assets/shootingstar2.gif" alt="shooting star" >
+            <img id="star3"src="Assets/star.gif" alt="shooting star" >
         </div>
         <div id="sect-legend">
 
@@ -37,24 +61,45 @@
 
 
         </div>
+
+
+
     </div>
     </div>
 
     <div id="sect-clock">
         <svg height="1000" width="1000" id="monhorloge" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
-            <circle cx="500" cy="500" r="200" stroke="black" stroke-width="5" fill="#FCF5E5" />
-            <circle cx="500" cy="500" r="150" stroke="black" stroke-width="5" fill="#FCF5E5" />
+
+            <defs>
+                <!-- <linearGradient id="ex_spreadMethod" x1="20%" y1="30%" x2="40%" y2="80%"> -->
+                <linearGradient id="ex_spreadMethod" x1="60%" y1="20%" x2="30%" y2="70%">
+
+                <!-- <stop offset="0%" stop-color="#7A5FFF"/>
+                <stop offset="100%" stop-color="#01FF89"/> -->
+                <stop offset="0%" stop-color="#F0E68C"/>
+                <stop offset="100%" stop-color="#49688c"/>
+                </linearGradient>
+                <linearGradient id="pad" href="#ex_spreadMethod"/>
+            </defs>
+
+
+            <!-- <circle cx="500" cy="500" r="200" stroke="brown" stroke-width="5" fill="#FCF5E5" />
+            <circle cx="500" cy="500" r="150" stroke="black" stroke-width="5" fill="#FCF5E5" /> -->
+
+            <circle cx="500" cy="500" r="200" stroke="brown" stroke-width="5" fill="#FCF5E5" />
+            <circle cx="500" cy="500" r="150" stroke="black" stroke-width="5" fill="url(#pad)"/>
+
             <line id="lineleverSoleil" x1="500" y1="500" x2="300" y2="500" style="stroke: yellow;stroke-width:5" stroke-dasharray="2 2"/>
             <line id="linecoucherSoleil" x1="500" y1="500" x2="500" y2="700" style="stroke: black;stroke-width:5" stroke-dasharray="2 2"/>
             
-            <line id="hoursHand" x1="500" y1="500" x2="500" y2="400" stroke="red" stroke-width="5" stroke-linecap="round">
+            <line id="hoursHand" x1="500" y1="500" x2="500" y2="400" stroke="red" stroke-width="8" stroke-linecap="round">
                 <animatetransform attributeName="transform"
                                 attributeType="XML"
                                 type="rotate"
                                 dur="43200s"
                                 repeatCount="indefinite"/>
             </line>
-            <line id="minutesHand" x1="500" y1="500" x2="500" y2="380" stroke="blue" stroke-width="3" stroke-linecap="round">
+            <line id="minutesHand" x1="500" y1="500" x2="500" y2="380" stroke="blue" stroke-width="5" stroke-linecap="round">
                 <animatetransform attributeName="transform"
                                 attributeType="XML"
                                 type="rotate"
