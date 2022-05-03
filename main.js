@@ -82,6 +82,58 @@ function moonPhase(){
 
 }
 
+function setSun(JsonMeteo){
+
+    var rayon = 200;
+
+    var sunriseUnixTimeStamp=JsonMeteo.daily[0].sunrise;
+    var sunsetUnixTimeStamp=JsonMeteo.daily[0].sunset;
+    
+    var dateSunRise = new Date(sunriseUnixTimeStamp * 1000);
+    var hoursSunRise = dateSunRise.getHours();
+    if (dateSunRise.getMinutes()>=10)  var minutesSunRise = dateSunRise.getMinutes();
+    else minutesSunRise = "0" + dateSunRise.getMinutes();
+
+    var dateSunSet = new Date(sunsetUnixTimeStamp * 1000);
+    var hoursSunSet = dateSunSet.getHours();
+    if (dateSunSet.getMinutes()>=10)  var minutesSunSet = dateSunSet.getMinutes();
+    else minutesSunSet = "0" + dateSunSet.getMinutes();
+
+    //console.log(hoursSunRise+'h'+minutesSunRise)
+    //console.log(hoursSunSet+'h'+minutesSunSet)
+
+
+    var hoursAngleSunRise = 180 + 360 * hoursSunRise / 24 + minutesSunRise / 4;
+    var hoursAngleSunSet = 180 + 360 * hoursSunSet/ 24 + minutesSunSet / 4;
+
+    var ajustement = Math.PI/180 * 180
+
+    var sintmpAngleRise = Math.sin(hoursAngleSunRise* Math.PI/180 + ajustement)
+    var costmpAngleRise = Math.cos(hoursAngleSunRise * Math.PI/180 + ajustement)
+    var sintmpAngleSet = Math.sin(hoursAngleSunSet* Math.PI/180 + ajustement )
+    var costmpAngleSet = Math.cos(hoursAngleSunSet* Math.PI/180 + ajustement)
+
+    
+
+    var xSunRise = 500 - rayon*sintmpAngleRise
+    var ySunRise = rayon*costmpAngleRise + 500
+
+    var xSunSet = 500 - rayon*sintmpAngleSet
+    var ySunSet = rayon*costmpAngleSet + 500
+
+    console.log(hoursAngleSunRise)
+    console.log(xSunRise)
+    console.log(ySunRise)
+
+    var lever = document.getElementById("lineleverSoleil")
+    var coucher = document.getElementById("linecoucherSoleil")
+
+    lever.setAttribute("x2", xSunRise)
+    lever.setAttribute("y2", ySunRise)
+
+    coucher.setAttribute("x2", xSunSet)
+    coucher.setAttribute("y2", ySunSet)
+}
 
 
 // Procedure to populate the 24h numbers inside the clock (Largely inspired by M. Sebastien Roy's example code)
@@ -222,6 +274,7 @@ function meteo() {
         if (this.readyState == 4 && this.status == 200) {
             var JsonMeteo=JSON.parse(this.responseText);
             traiteLaMeteo(JsonMeteo);
+            setSun(JsonMeteo)
         }
     };
     req.open("GET", url, true);
