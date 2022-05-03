@@ -42,6 +42,8 @@ function moonPhase(){
         month+=12;
     }
 
+    //Cacul pour detreminer la phase lunaires
+
     a1 = year/100;
     a2 = a1/4;
     a3 = 2-a1+a2;
