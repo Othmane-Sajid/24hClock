@@ -99,10 +99,6 @@ function setSun(JsonMeteo){
     if (dateSunSet.getMinutes()>=10)  var minutesSunSet = dateSunSet.getMinutes();
     else minutesSunSet = "0" + dateSunSet.getMinutes();
 
-    //console.log(hoursSunRise+'h'+minutesSunRise)
-    //console.log(hoursSunSet+'h'+minutesSunSet)
-
-
     var hoursAngleSunRise = 180 + 360 * hoursSunRise / 24 + minutesSunRise / 4;
     var hoursAngleSunSet = 180 + 360 * hoursSunSet/ 24 + minutesSunSet / 4;
 
@@ -120,10 +116,6 @@ function setSun(JsonMeteo){
 
     var xSunSet = 500 - rayon*sintmpAngleSet
     var ySunSet = rayon*costmpAngleSet + 500
-
-    console.log(hoursAngleSunRise)
-    console.log(xSunRise)
-    console.log(ySunRise)
 
     var lever = document.getElementById("lineleverSoleil")
     var coucher = document.getElementById("linecoucherSoleil")
