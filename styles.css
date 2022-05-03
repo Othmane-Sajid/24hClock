@@ -44,7 +44,7 @@ body{
 }
 
 #sect-legend{
-    background-color: white;
+    background-color:papayawhip;
     width: 50vh;
     height: 40vh;
     border-style: dotted;
@@ -105,13 +105,16 @@ body{
 /* Inspired by https://code-boxx.com/html-css-news-ticker-horizontal-vertical/#sec-horizontal */
 .wrapper {
     overflow: hidden; 
-    background: #eee;
+    background:lavender;
   }
    
   .tickerMessage {
     font-size:xx-large;
+    font-family:Ubuntu; 
+    font-weight: bold;
     padding: 60px;
     text-align: center;
+    color:darkorange;
   }
   @keyframes keyTimes {
     0% { transform: translate3d(100%, 0, 0); }
