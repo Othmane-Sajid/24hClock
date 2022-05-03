@@ -90,6 +90,15 @@ body{
     margin-left: 20vw;
 }
 
+#sect-presentation{
+    background-color:papayawhip;
+    width: 50vh;
+    height: 45vh;
+    border-style: dotted;
+    margin-top: 25vh;
+    margin-left: 2vw;
+}
+
 #tempMin {
     color:blue;
 }
@@ -152,7 +161,8 @@ body{
 /* Inspired by https://code-boxx.com/html-css-news-ticker-horizontal-vertical/#sec-horizontal */
 .wrapper {
     overflow: hidden; 
-    background:lavender;
+    background:papayawhip;
+    border-style:groove;
   }
    
   .tickerMessage {
@@ -161,7 +171,7 @@ body{
     font-weight: bold;
     padding: 60px;
     text-align: center;
-    color:darkorange;
+    color:darkred;
   }
   @keyframes keyTimes {
     0% { transform: translate3d(100%, 0, 0); }
