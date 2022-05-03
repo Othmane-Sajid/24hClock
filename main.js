@@ -155,7 +155,7 @@ function  txt(texte,rot)  {
     e.setAttribute("x",500);
     e.setAttribute("y",640);
     e.setAttribute("fill","red");
-    e.setAttribute("style","text-anchor:middle; font-family:Ubuntu; font-weight: bold; font-size:192;");
+    e.setAttribute("style","text-anchor:middle; font-family:Ubuntu; font-weight: bold; font-size:20px;");
     e.setAttribute("transform","rotate("+rot+" 500 500)");
     var textNode = document.createTextNode(texte);
     e.appendChild(textNode);
