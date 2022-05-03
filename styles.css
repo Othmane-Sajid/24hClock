@@ -14,6 +14,43 @@ body{
     background-size: cover;
 }
 
+#sect-lune img{
+    width: 60px;
+}
+#yellowSun{
+    position: absolute;
+    width: 60px;
+    left: 50%;
+    top: 35%;
+    z-index: 2;
+}
+#whiteMoon{
+    position: absolute;
+    width: 60px;
+    left: 47%;
+    top: 60%;
+    z-index: 2;
+}
+
+#star1{
+    position: absolute;
+    left: 65%;
+    top: 0%;
+}
+#star2{
+    position: absolute;
+    width: 20%;
+    left: 80%;
+    top: 00%;
+}
+#star3{
+    width: 50%;
+    height: 55%;
+    position: absolute;
+    left: 50%;
+    top: 0%;
+}
+
 #sect-apres-midi{
     background-image: url("./Assets/afternoon.jpg");
     width: 50vw;
@@ -24,6 +61,7 @@ body{
 }
 
 #sect-lune{
+
     width: 15vh;
     height: 15vh;
     margin-top: 10vh;
@@ -64,6 +102,15 @@ body{
     position: absolute;
     left: 50%;
     top: 50%;
+    margin-top: -500px;
+    margin-left: -500px;
+    z-index: 2;
+}
+
+#sect-nuit{
+    position: absolute;
+    left: 60%;
+    top: 90%;
     margin-top: -500px;
     margin-left: -500px;
     z-index: 2;

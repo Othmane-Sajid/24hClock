@@ -10,12 +10,18 @@
 
     <div id="sect-avant-midi">
         <div id="sect-lune">
-
+            <img src="/Assets/bird.gif" alt="bird" style="margin-left: 60%; margin-top: 80%;">
+            <img src="/Assets/bird.gif" alt="bird" style="margin-left: 150%; margin-top: 30%;">
+            <img src="/Assets/bird.gif" alt="bird" style="margin-left: 60%; margin-top: 80%;">
+            <img src="/Assets/bird.gif" alt="bird" style="margin-left: 80%; margin-top: 0%;">
+            <img src="/Assets/bird.gif" alt="bird" style="margin-left: 90%; margin-top: 0%;">
         </div>
     </div>
     <div id="sect-apres-midi">
         <div id="sect-jour">
-
+            <img id="star1"src="/Assets/shootingstar.gif" alt="shooting star" >
+            <img id="star2"src="/Assets/shootingstar2.gif" alt="shooting star" >
+            <img id="star3"src="/Assets/star.gif" alt="shooting star" >
         </div>
         <div id="sect-legend">
 
@@ -38,6 +44,9 @@
         <svg height="1000" width="1000" id="monhorloge" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
             <circle cx="500" cy="500" r="200" stroke="black" stroke-width="5" fill="#FCF5E5" />
             <circle cx="500" cy="500" r="150" stroke="black" stroke-width="5" fill="#FCF5E5" />
+            <line id="lineleverSoleil" x1="500" y1="500" x2="300" y2="500" style="stroke: yellow;stroke-width:5" stroke-dasharray="2 2"/>
+            <line id="linecoucherSoleil" x1="500" y1="500" x2="500" y2="700" style="stroke: black;stroke-width:5" stroke-dasharray="2 2"/>
+            
             <line id="hoursHand" x1="500" y1="500" x2="500" y2="400" stroke="red" stroke-width="5" stroke-linecap="round">
                 <animatetransform attributeName="transform"
                                 attributeType="XML"
@@ -60,8 +69,12 @@
             
             <g id="meteo">
             </g>
-        </svg> 
+        </svg > 
     </div>
+
+    <img  id="yellowSun" src="Assets/noon.jpg" alt="yellow sun">
+    <img  id="whiteMoon" src="Assets/fullmoon.jpg" alt="white moon">
+
     <div id="sect-hour">
         <h1 id="date">Date : </h1>
         <h1 id="heureNumerique">Heure : </h1>
