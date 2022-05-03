@@ -9,7 +9,7 @@ function changeDaytState(id,url){ // utlity function for sun and moon phase
     xhttp.send();
 }
 
-
+//Determine la position du soleil
 function sunPosition(){
     var today = new Date();
     var currentHour = today.getHours();
@@ -28,6 +28,7 @@ function sunPosition(){
     }
 }
 
+//Determine la position de la lune
 function moonPhase(){
     var today = new Date();
     var sectLune = "sect-lune"
@@ -102,7 +103,12 @@ function setSun(JsonMeteo){
     var hoursAngleSunRise = 180 + 360 * hoursSunRise / 24 + minutesSunRise / 4;
     var hoursAngleSunSet = 180 + 360 * hoursSunSet/ 24 + minutesSunSet / 4;
 
+
+    // rotation de 180 degrés en radiant
     var ajustement = Math.PI/180 * 180
+
+
+    // Cacul des coordonnées en x et y à partir de l'angle converti en radiant
 
     var sintmpAngleRise = Math.sin(hoursAngleSunRise* Math.PI/180 + ajustement)
     var costmpAngleRise = Math.cos(hoursAngleSunRise * Math.PI/180 + ajustement)
