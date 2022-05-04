@@ -9,7 +9,7 @@ function changeDaytState(id,url){ // utlity function for sun and moon phase
     xhttp.send();
 }
 
-//Determine la position du soleil
+//Determine the sun position
 function sunPosition(){
     var today = new Date();
     var currentHour = today.getHours();
@@ -28,7 +28,7 @@ function sunPosition(){
     }
 }
 
-//Determine la position de la lune
+//Determine the current moon phase 
 function moonPhase(){
     var today = new Date();
     var sectLune = "sect-lune"
@@ -42,7 +42,7 @@ function moonPhase(){
         month+=12;
     }
 
-    //Cacul pour detreminer la phase lunaires
+    //Caculations for moon phase
 
     a1 = year/100;
     a2 = a1/4;
@@ -139,19 +139,13 @@ function setSun(JsonMeteo){
 // Procedure to populate the 24h numbers inside the clock (Largely inspired by M. Sebastien Roy's example code)
 
 var svg=document.getElementById("monhorloge");
-// var ai=document.getElementById("aig1");
 var gHeures=document.getElementById("heures");
-// var gTics=document.getElementById("tics");
 var gMeteo=document.getElementById("meteo");
 var h=0;
 
 
-function  txt(texte,rot)  {
+function txt(texte,rot)  {
     var e = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-    // e.setAttribute("x",630);
-    // e.setAttribute("y",500);
-    // e.setAttribute("x",500);
-    // e.setAttribute("y",375);
     e.setAttribute("x",500);
     e.setAttribute("y",640);
     e.setAttribute("fill","red");
@@ -162,11 +156,10 @@ function  txt(texte,rot)  {
     gHeures.appendChild(e);
 }
 
+// Procedure to display the 24 meteo dots inside the clock, next to each hour (code provided by M. Sebastien Roy's example code)
 function meteoDot(rot,id) {
     var e = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
     e.setAttribute("id",id);
-    // e.setAttribute("cx","675");
-    // e.setAttribute("cy","500");
     e.setAttribute("cx","500");
     e.setAttribute("cy","670");
     e.setAttribute("r","12");
@@ -177,43 +170,14 @@ function meteoDot(rot,id) {
     return(e);
 }
 
-// function ajuste()  {
-//     ai.setAttribute("transform","rotate("+h+" 200 200)");
-//     h=h+10.0;
-// }
-
-
 // Populate the clock with the 24 numeric values (hours) and meteo dots 
 for(var i=0;i<24;i++) txt(""+i,i*360/24);
 var meteoTab = [];
 for(var i=0;i<24;i++) meteoTab[i]=meteoDot(i*360/24,"meteoDot"+i);
 
-//  change un meteodot
-//var  md=document.getElementById("meteoDot4");
-//md.setAttribute("fill","green");
-
-//meteoTab[4].setAttribute("fill","rgb(255,255,0)");
-
-// for(var i=0;i<24;i++) meteoTab[i].setAttribute("fill","rgb("+(i*255/23)+","+(255-i*255/23)+",255)");
-
-//  change un meteodot
-//var  md=document.getElementById("meteoDot4");
-//md.setAttribute("fill","green");
-
-//meteoTab[4].setAttribute("fill","rgb(255,255,0)");
-
-// for(var i=0;i<24;i++) meteoTab[i].setAttribute("fill","rgb("+(i*255/23)+","+(255-i*255/23)+",255)");
 
 
-
-
-
-
-
-
-
-
-// Function to use Hourly feels_like temperature and represent it visualy on the clock with a color gradient. 
+// Function to use Hourly feels_like temperatures and represent it visualy on the clock with a color gradient. 
 // Also display some textual infos (sunrise, sunset, min and max feels_like temps) 
 function traiteLaMeteo(JsonMeteo) {
     var h=JsonMeteo.hourly;
@@ -238,7 +202,6 @@ function traiteLaMeteo(JsonMeteo) {
         meteoTab[rotateTimeInBounds(currentHour+ i)].setAttribute("fill","rgb("+(f*255)+",0,"+(255-f*255)+")");
     }
 
-
     // Show useful infos in the Legend Section 
     document.getElementById("tempMin").innerHTML=''+tmin + ' degrés celcius (bleu)';
     document.getElementById("tempMax").innerHTML=''+tmax + ' degrés celcius (rouge)';
@@ -259,11 +222,6 @@ function traiteLaMeteo(JsonMeteo) {
 
     document.getElementById("leverSoleil").innerHTML=''+hoursSunRise+'h'+minutesSunRise;
     document.getElementById("coucherSoleil").innerHTML=''+hoursSunSet+'h'+minutesSunSet;
-
-    // console.log("sunrise dans "+((sunrise-Date.now()/1000)/3600));
-    // console.log("sunset dans  "+((sunset-Date.now()/1000)/3600));
-
-    // console.log(sunrise);
 }
 
 
@@ -297,6 +255,7 @@ function whatDayOfTheWeek() {
         case 6 : return "samedi"; break;
     }
 }
+
 function showDateAndTimeNumericFormat() {
     var now=Math.round(Date.now()/1000); // Unix timestamp in seconds
     var dateToday=new Date(now*1000).toLocaleString();
@@ -313,7 +272,7 @@ function showDateAndTimeNumericFormat() {
 
 // Ticker procedure  
 function showTicker(calendrier) {  
-    var now=Math.round(Date.now()/1000); // a la seconde pres
+    var now=Math.round(Date.now()/1000); 
 
     if( typeof(calendrier)=="undefined")  return;
 
@@ -323,12 +282,16 @@ function showTicker(calendrier) {
     for(var i=0;i<calendrier.length;i++) {
         var c = calendrier[i]; 
         var boolActif=(c.debut<now && now<c.fin);
-        if( boolActif ) tickerToDisplay = c.message;
+        if( boolActif ) {
+            tickerToDisplay = c.message;
+            if (calendrier[i].important) tickerToDisplay = ""+c.message+" (Important !)";
+        }
     } 
     e.innerHTML=tickerToDisplay;
 }
 
 var cal;  //  le  calendrier
+
 function lireCalendrier()  {
     const req = new XMLHttpRequest();
     const url='http://www.iro.umontreal.ca/~roys/ift1005/calendrier/test.php?cal=now%2C%2B30sec%2Cbonjour%0D%0A%2B2min%2C%2B5min%2Csalut%2C!%0D%0A%2B1hour%2C%2B30sec%2Callo%0D%0A';
@@ -344,22 +307,20 @@ function lireCalendrier()  {
     };
 }
 
-// function to constantly keep the hours and minutes hands showing the correct time
-function adjustHourAndMinutesHands(){ // inspired by https://codepen.io/mohebifar/pen/KwdeMz
+// function to constantly keep the hours and minutes hands showing the correct time (inspired by https://codepen.io/mohebifar/pen/KwdeMz)
+function adjustHourAndMinutesHands(){ 
     var date = new Date();
     var minutesAngle = 360 * date.getMinutes() / 60;
     var hoursAngle = 180 + 360 * date.getHours() / 24 + date.getMinutes() / 4;
 
     var hoursHand = document.querySelector('#hoursHand > *');
     var newFromAttributeHours = [hoursAngle, 500, 500].join(" "); //500, 500 for the center of the circle/clock
-    // var newToAttributeHours = [hoursAngle+360, 500, 500].join(" ");
     var newToAttributeHours = [hoursAngle, 500, 500].join(" ");
     hoursHand.setAttribute('from',newFromAttributeHours); 
     hoursHand.setAttribute('to', newToAttributeHours); 
 
     var minutesHand = document.querySelector('#minutesHand > *');
     var newFromAttributeMinutes = [minutesAngle, 500, 500].join(" ");
-    // var newToAttributeMinutes = [minutesAngle+360, 500, 500].join(" ");
     var newToAttributeMinutes = [minutesAngle, 500, 500].join(" ");
     minutesHand.setAttribute('from',newFromAttributeMinutes);
     minutesHand.setAttribute('to', newToAttributeMinutes); 
@@ -367,12 +328,14 @@ function adjustHourAndMinutesHands(){ // inspired by https://codepen.io/mohebifa
 
 
 function init() {
-    lireCalendrier()
+    
     window.onload=function() {
-        showTicker(cal);
-        setInterval(function() { showTicker(cal); },15000); // verify if ticker needs to be changed every 15 sec
 
-        showDateAndTimeNumericFormat()
+        lireCalendrier();
+        showTicker(cal);
+        setInterval(function() { showTicker(cal); },5000); // verify if a ticker needs to be displayed every 5 sec
+
+        showDateAndTimeNumericFormat();
         setInterval(function() { showDateAndTimeNumericFormat(); },1000); // update numeric clock every second
 
         sunPosition();
@@ -380,61 +343,13 @@ function init() {
         moonPhase();
         setInterval(moonPhase(), 1000*60*60*24); //update moon phase once per day (every 24 hours)
 
-        adjustHourAndMinutesHands()
-        setInterval(function() { adjustHourAndMinutesHands(); },1000); // Adjust hour and minutes hands every five seconds  
+        adjustHourAndMinutesHands();
+        setInterval(function() { adjustHourAndMinutesHands(); },5000); // Adjust hour and minutes hands every five seconds  
 
         meteo();
-        setInterval(function() { meteo(); },1000 * 60 * 60 ); // Update meteo every hour  
+        setInterval(function() { meteo(); },1000 * 60 * 60 ); // Update meteo dots every hour with
     } 
 }
 
 
 init();
-
-
-
-
-
-
-
-
-
-
-// function init() {
-//     lireCalendrier()
-//     window.onload=(showTicker(cal));
-//     window.onload=function() {
-//         setInterval(function() { showTicker(cal); },15000); // verify if ticker needs to be changed every 15 sec
-//     } 
-    
-//     // showDateAndTimeNumericFormat()
-//     // window.onload=function() {
-//     //     setInterval(function() { showDateAndTimeNumericFormat(); },1000); 
-//     // } 
-  
-  
-//     window.onload=function() {
-//         showDateAndTimeNumericFormat()
-//         setInterval(function() { showDateAndTimeNumericFormat(); },1000); 
-//         setInterval(sunPosition(), 1000);
-//         moonPhase();
-//         setInterval(moonPhase(), 86400000);
-//     } 
-
-//     // Adjust the Hour handle and Minutes handle
-//     adjustHourAndMinutesHands()
-//     window.onload=function() {
-//         setInterval(function() { adjustHourAndMinutesHands(); },10000); // Adjust hour and minutes hands every 10 seconds 
-//     } 
-
-//     meteo();
-//     window.onload=function() {
-//         setInterval(function() { meteo(); },1000 * 60 * 60 ); // Update meteo every hour 
-//     } 
-
-// }
-
-
-
-// init();
-

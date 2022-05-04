@@ -1,8 +1,6 @@
 # 24hClock
 
+Équipe : 
+- Othmane Sajid (matricule :20135964)
+- 
 
-
-Idea : Dans Legende, afficher : 
-
-temperature minimum de la journee  = X degres (bleu)
-Temperature max ajd = Y degres (rouge)
